@@ -1,0 +1,20 @@
+:root {
+  --bg-primary: #030810;
+  --bg-secondary: #07111d;
+  --panel: #091725;
+  --blue: #00aaff;
+  --cyan: #25e7ff;
+  --orange: #ff7a00;
+  --orange-bright: #ff9d24;
+  --steel: #c9d2dd;
+  --white: #f8fbff;
+  --muted: #8fa3b8;
+  --border-blue: rgba(0, 170, 255, 0.4);
+  --border-orange: rgba(255, 122, 0, 0.4);
+  --nav-h: 76px;
+  --font-display: "Orbitron", "Segoe UI", sans-serif;
+  --font-body: "Space Grotesk", "Segoe UI", sans-serif;
+  --shadow-blue: 0 0 28px rgba(0, 170, 255, 0.28);
+  --shadow-orange: 0 0 28px rgba(255, 122, 0, 0.32);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
