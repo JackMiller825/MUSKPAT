@@ -18,7 +18,7 @@ export default function App() {
         Skip to content
       </a>
       <Navbar />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero />
         <RocketDivider label="EARTH → MOON → MARS → ∞" />
         <About />
