@@ -37,36 +37,111 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        gap: 14px;
         padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
         background: #020714;
       }
-      .arrival img {
-        width: min(100%, calc(100dvh - 88px));
-        height: auto;
-        max-height: calc(100dvh - 88px);
-        object-fit: contain;
-        background: #020714;
+      .arrival-stage {
+        position: relative;
+        width: min(100%, calc(100dvh - 132px));
+        aspect-ratio: 1;
       }
-      .arrival-bar {
+      .arrival-half {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .arrival-left { left: 0; }
+      .arrival-right { right: 0; }
+      .arrival-half img {
+        position: absolute;
+        top: 0;
+        width: 200%;
+        max-width: none;
+        height: 100%;
+        object-fit: cover;
+      }
+      .arrival-left img { left: 0; }
+      .arrival-right img { right: 0; }
+      .arrival-stage::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        transform: translateX(-50%);
+        background: #54ff62;
+        box-shadow: 0 0 18px #54ff62, 0 0 42px rgba(84, 255, 98, 0.65);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .arrival-load {
+        width: min(100%, calc(100dvh - 132px));
+      }
+      .arrival-load-top {
         display: flex;
-        justify-content: center;
-      }
-      .arrival-enter {
-        min-height: 46px;
-        padding: 0 22px;
-        border: 0;
-        border-radius: 999px;
-        color: #04140a;
-        background: linear-gradient(180deg, #86ff8e, #24ff41);
-        box-shadow: 0 0 0 1px rgba(84, 255, 98, 0.4), 0 0 18px rgba(84, 255, 98, 0.28);
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 8px;
         font-family: Orbitron, sans-serif;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        cursor: pointer;
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        color: #70ddff;
       }
-      .arrival-enter:focus-visible { outline: 2px solid #54ff62; outline-offset: 3px; }
+      .arrival-pct {
+        color: #54ff62;
+        font-size: 1.45rem;
+        letter-spacing: 0.06em;
+        text-shadow: 0 0 16px rgba(84, 255, 98, 0.7);
+      }
+      .arrival-track {
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: rgba(4, 16, 30, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(112, 221, 255, 0.4), 0 0 22px rgba(0, 191, 255, 0.2);
+      }
+      .arrival-fill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #00bfff, #24ff41 58%, #d8ffd2);
+        box-shadow: 0 0 18px rgba(36, 255, 65, 0.9);
+        position: relative;
+      }
+      .arrival-fill::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(100deg, transparent 15%, rgba(255, 255, 255, 0.7) 50%, transparent 85%);
+        background-size: 240% 100%;
+        animation: arrival-sheen 0.9s linear infinite;
+      }
+      .arrival.is-split { background: transparent; pointer-events: none; }
+      .arrival.is-split .arrival-left { animation: arrival-out-left 1.05s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
+      .arrival.is-split .arrival-right { animation: arrival-out-right 1.05s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
+      .arrival.is-split .arrival-load { animation: arrival-fade 0.28s ease forwards; }
+      .arrival.is-split .arrival-stage::after { animation: arrival-seam 0.4s ease forwards; }
+      @keyframes arrival-sheen {
+        from { background-position: 130% 0; }
+        to { background-position: -50% 0; }
+      }
+      @keyframes arrival-out-left {
+        to { transform: translateX(-70vw); }
+      }
+      @keyframes arrival-out-right {
+        to { transform: translateX(70vw); }
+      }
+      @keyframes arrival-fade {
+        to { opacity: 0; }
+      }
+      @keyframes arrival-seam {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+      }
       .arrival .sr-only {
         position: absolute;
         width: 1px;
@@ -88,34 +163,78 @@
     />
   </head>
   <body>
-    <div class="arrival" id="arrival" role="dialog" aria-modal="true" aria-labelledby="arrival-title">
-      <h1 id="arrival-title" class="sr-only">MUSK MOONSHOT PATTERN</h1>
-      <img
-        src="%BASE_URL%images/muskpat-preview-concept-main.jpg"
-        alt="Mission-control concept art for MUSK MOONSHOT PATTERN, $MUSKPAT."
-        width="1024"
-        height="1024"
-        fetchpriority="high"
-      />
-      <div class="arrival-bar">
-        <button class="arrival-enter" id="arrival-enter" type="button">ENTER THE MISSION</button>
+    <div class="arrival" id="arrival" role="dialog" aria-modal="true" aria-labelledby="arrival-title" aria-busy="true">
+      <h1 id="arrival-title" class="sr-only">Loading MUSK MOONSHOT PATTERN</h1>
+      <div class="arrival-stage">
+        <div class="arrival-half arrival-left">
+          <img
+            src="%BASE_URL%images/muskpat-preview-concept-main.jpg"
+            alt="Mission-control concept art for MUSK MOONSHOT PATTERN, $MUSKPAT."
+            width="1024"
+            height="1024"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="arrival-half arrival-right" aria-hidden="true">
+          <img src="%BASE_URL%images/muskpat-preview-concept-main.jpg" alt="" width="1024" height="1024" />
+        </div>
+      </div>
+      <div class="arrival-load">
+        <div class="arrival-load-top">
+          <span>LOADING</span>
+          <span class="arrival-pct" id="arrival-pct">0%</span>
+        </div>
+        <div
+          class="arrival-track"
+          id="arrival-progress"
+          role="progressbar"
+          aria-label="Loading"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+        >
+          <div class="arrival-fill" id="arrival-fill"></div>
+        </div>
       </div>
     </div>
     <div id="root"></div>
     <script>
       (function () {
+        var DURATION = 3000;
+        var SPLIT = 1080;
         var arrival = document.getElementById("arrival");
-        var enter = document.getElementById("arrival-enter");
+        var fill = document.getElementById("arrival-fill");
+        var pct = document.getElementById("arrival-pct");
+        var progress = document.getElementById("arrival-progress");
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var start = performance.now();
         document.body.style.overflow = "hidden";
+
         function closeArrival() {
           arrival.hidden = true;
+          arrival.setAttribute("aria-busy", "false");
           document.body.style.overflow = "";
-          document.getElementById("main")?.focus();
         }
-        enter.addEventListener("click", closeArrival);
-        window.addEventListener("keydown", function (event) {
-          if (!arrival.hidden && event.key === "Escape") closeArrival();
-        });
+
+        function frame(now) {
+          var amount = Math.min(1, (now - start) / DURATION);
+          var value = Math.round(amount * 100);
+          fill.style.width = value + "%";
+          pct.textContent = value + "%";
+          progress.setAttribute("aria-valuenow", String(value));
+          if (amount < 1) {
+            requestAnimationFrame(frame);
+            return;
+          }
+          if (reduced) {
+            closeArrival();
+            return;
+          }
+          arrival.classList.add("is-split");
+          window.setTimeout(closeArrival, SPLIT);
+        }
+
+        requestAnimationFrame(frame);
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>
