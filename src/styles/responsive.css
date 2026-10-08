@@ -1,0 +1,105 @@
+@media (min-width: 1440px) {
+  .wrap, .hero-grid, .rocket-divider-track { width: min(1240px, calc(100% - 80px)); }
+}
+
+@media (min-width: 1920px) {
+  .wrap, .hero-grid, .rocket-divider-track { width: min(1280px, calc(100% - 160px)); }
+  .line-musk { font-size: 7.6rem; }
+}
+
+@media (max-width: 1100px) {
+  .nav-links, .nav-tools .icon-btn, .nav-buy { display: none; }
+  .menu-toggle { display: grid; }
+  .pattern-track { grid-template-columns: 1fr; padding-left: 28px; }
+  .pattern-line {
+    left: 8px;
+    right: auto;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    height: auto;
+  }
+  .pattern-line span { transform: scaleY(0); transform-origin: top center; }
+  .pattern-track.is-live .pattern-line span { animation-name: draw-y; }
+  .steps { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .split, .hero-grid, .final-grid, .footer-grid, .roadmap-track {
+    grid-template-columns: 1fr;
+  }
+  .hero-stage { order: 2; min-height: 460px; }
+  .monitor { justify-self: stretch; max-width: none; }
+  .roadmap-track { padding-left: 18px; }
+  .roadmap-track::before {
+    top: 0;
+    bottom: 0;
+    left: 22px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .phase-node { margin-left: 0; }
+  .community-grid, .about-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .sticker-optional, .float-sticker { display: none; }
+  .value-points { grid-template-columns: 1fr; }
+  .contract-bar-inner { grid-template-columns: auto 1fr; }
+  .contract-meta, .contract-bar-inner .glow-btn { grid-column: 1 / -1; }
+  .hero { padding-top: 28px; }
+  .stage-readout { position: static; margin-top: 8px; }
+  .planet.mars { width: 64px; height: 64px; }
+  .planet.earth { width: 46px; height: 46px; }
+}
+
+@media (max-width: 700px) {
+  .site-header, .panel, .terminal { backdrop-filter: none; }
+  .stars, .grid-overlay, .planet, .float-sticker, .hero-sticker { animation: none; }
+  .stars, .grid-overlay { opacity: 0.7; }
+}
+
+@media (max-width: 640px) {
+  .steps, .stat-grid { grid-template-columns: 1fr; }
+  .hero-actions, .buy-actions, .final-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .glow-btn, .buy-actions .glow-btn, .final-actions .glow-btn { width: 100%; }
+  .glow-btn--art img { width: 100%; }
+  .line-rest { letter-spacing: 0.08em; }
+  .footer-socials { justify-content: flex-start; }
+}
+
+@media (max-width: 430px) {
+  .wrap, .hero-grid, .rocket-divider-track { width: min(100% - 24px, 1180px); }
+  .brand small { display: none; }
+  .line-musk { font-size: 3.1rem; }
+  .section-heading h2, .final-cta h2 { font-size: 1.85rem; }
+  .hero-stage { min-height: 390px; }
+  .divider-label { letter-spacing: 0.06em; font-size: 0.58rem; }
+}
+
+@media (max-width: 375px) {
+  .ticker { font-size: 1.7rem; }
+  .hero-kicker { letter-spacing: 0.1em; font-size: 0.68rem; }
+}
+
+@media (max-width: 320px) {
+  .line-musk { font-size: 2.7rem; }
+  .line-rest { font-size: 0.92rem; }
+  .nav-bar { width: calc(100% - 16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero-kicker, .hero-title, .ticker, .slogan, .lede, .hero-actions, .value-points,
+  .hero-character, .hero-sticker, .floating-chart, .stars, .grid-overlay, .ignition,
+  .candle, .final-rocket, .pattern-line span, .pattern-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .chart-path { stroke-dashoffset: 0 !important; }
+}

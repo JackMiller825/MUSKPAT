@@ -1,125 +1,143 @@
-@keyframes floaty {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes icon-glow {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 4px rgba(37, 231, 255, 0.55));
-  }
-  50% {
-    filter: drop-shadow(0 0 10px rgba(255, 157, 36, 0.85));
-  }
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
 }
 
-@keyframes reactor {
-  0%,
-  100% {
-    box-shadow:
-      0 0 24px rgba(255, 122, 0, 0.28),
-      0 0 80px rgba(0, 170, 255, 0.16);
-  }
-  50% {
-    box-shadow:
-      0 0 48px rgba(255, 157, 36, 0.5),
-      0 0 120px rgba(37, 231, 255, 0.28);
-  }
+@keyframes ticker-glow {
+  from { text-shadow: 0 0 0 transparent; }
+  to { text-shadow: 0 0 18px rgba(84, 255, 98, 0.55); }
 }
 
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+@keyframes chart-rise {
+  from { opacity: 0; transform: translate(18px, 28px); }
+  to { opacity: 1; transform: none; }
 }
 
-@keyframes arm-sway {
-  0%,
-  100% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
+@keyframes candle-grow {
+  from { transform: scaleY(0.12); }
+  to { transform: scaleY(1); }
 }
 
-@keyframes boot-fill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
 }
 
-@keyframes glitch-shift {
-  0%,
-  100% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 1px);
-  }
-  40% {
-    transform: translate(2px, -1px);
-  }
-  60% {
-    transform: translate(-1px, -1px);
-  }
-  80% {
-    transform: translate(1px, 1px);
-  }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(84, 255, 98, 0.35), 0 0 14px rgba(84, 255, 98, 0.22); }
+  50% { box-shadow: 0 0 0 1px rgba(84, 255, 98, 0.6), 0 0 26px rgba(84, 255, 98, 0.4); }
 }
 
-@keyframes spark {
-  from {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translate(var(--sx), var(--sy)) scale(0.2);
-  }
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes menu-in {
-  from {
-    opacity: 0;
-    transform: translateX(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.85; }
 }
 
-@keyframes pulse-ring {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+@keyframes grid-scan {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 72px, 72px 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
+
+@keyframes draw-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes draw-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes ignition {
+  from { opacity: 0; transform: scale(0.86); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rocket-rise {
+  from { opacity: 0; transform: translateY(46px); }
+  to { opacity: 1; transform: translateY(-8px); }
+}
+
+@keyframes border-pulse {
+  0%, 100% { border-color: rgba(112, 221, 255, 0.28); }
+  50% { border-color: rgba(84, 255, 98, 0.55); }
+}
+
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 80px 80px, rgba(112, 221, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 140px 40px, white, transparent),
+    radial-gradient(1px 1px at 180px 120px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 40px 150px, rgba(84, 255, 98, 0.7), transparent);
+  background-size: 220px 180px;
+  animation: fade-in 0.45s ease both, twinkle 6s ease-in-out 0.45s infinite;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(0, 191, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+  animation: fade-in 0.55s ease 0.2s both, grid-scan 22s linear 0.7s infinite;
+}
+
+.ignition { animation: ignition 0.9s ease 0.45s both; }
+
+.hero-kicker,
+.hero-title,
+.slogan,
+.lede,
+.hero-actions,
+.value-points { animation: rise-in 0.55s ease both; }
+.hero-kicker { animation-delay: 0.55s; }
+.hero-title { animation-delay: 0.68s; }
+.ticker { animation: rise-in 0.55s ease 0.9s both, ticker-glow 0.7s ease 1.15s both; }
+.slogan { animation-delay: 1.05s; }
+.lede { animation-delay: 1.15s; }
+.hero-actions { animation-delay: 1.35s; }
+.value-points { animation-delay: 1.5s; }
+
+.hero-character { animation: rise-in 0.7s ease 0.75s both; }
+.floating-chart { animation: chart-rise 1.35s ease 0.8s both; }
+.candle {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: candle-grow 0.65s ease both;
+}
+.chart-path {
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  animation: dash 1.3s ease 1.05s forwards;
+}
+.hero-sticker { animation: fade-in 0.5s ease 1.25s both, float-y 6s ease-in-out 1.8s infinite; }
+.planet { animation: float-y 7.5s ease-in-out infinite; }
+.float-sticker { animation: float-y 6.5s ease-in-out infinite; }
+.doge-happy { animation-delay: 0.4s; }
+.to-moon { animation-delay: 0.8s; }
+
+.pattern-track.is-live .pattern-line span { animation: draw-x 1.6s ease forwards; }
+.pattern-track.is-live .pattern-card { animation: rise-in 0.5s ease both; }
+.pattern-track.is-live .pattern-card:nth-child(2) { animation-delay: 0.12s; }
+.pattern-track.is-live .pattern-card:nth-child(3) { animation-delay: 0.24s; }
+.pattern-track.is-live .pattern-card:nth-child(4) { animation-delay: 0.36s; }
+.pattern-track.is-live .pattern-card:nth-child(5) { animation-delay: 0.48s; }
+.pattern-track.is-live .pattern-card:nth-child(6) { animation-delay: 0.6s; }
+
+.terminal { animation: border-pulse 5s ease-in-out infinite; }
+.final-cta.is-rising .final-rocket { animation: rocket-rise 1.5s ease forwards; }
