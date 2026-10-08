@@ -26,4 +26,4 @@ Edit `src/config/token.ts` and `src/config/socials.ts`. Leave a field empty unti
 - DexTools URL
 - Telegram, X, and Discord URLs
 
-The site publishes to GitHub Pages at `https://jackmiller825.github.io/MUSKPAT/`. When a custom domain is attached and serves the site from the root, set `base` in `vite.config.ts` to `"/"` and update the canonical and social URLs in `index.html`.
+The site publishes to GitHub Pages at `https://muskpat.site/`.

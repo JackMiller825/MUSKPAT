@@ -14,8 +14,6 @@ function spaFallback() {
 }
 
 export default defineConfig({
-  // Project Pages URL is /MUSKPAT/ until a custom domain is attached.
-  // Switch this to "/" when the domain serves the site from the root.
-  base: "/MUSKPAT/",
+  base: "/",
   plugins: [react(), spaFallback()],
 })
