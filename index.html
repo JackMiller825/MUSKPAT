@@ -120,20 +120,88 @@
         background-size: 240% 100%;
         animation: arrival-sheen 0.9s linear infinite;
       }
+      .arrival-candle {
+        position: absolute;
+        top: 46%;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 120px;
+        margin-left: -60px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .arrival-candle-red { left: 25%; color: #ff3148; }
+      .arrival-candle-green { left: 75%; color: #24ff41; }
+      .candle-mark {
+        position: relative;
+        width: 52px;
+        height: min(230px, 34vh);
+      }
+      .candle-mark .wick {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        transform: translateX(-50%);
+        border-radius: 2px;
+        background: currentColor;
+        box-shadow: 0 0 10px currentColor;
+      }
+      .candle-mark .body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        border-radius: 6px;
+        background: currentColor;
+        box-shadow: 0 0 22px currentColor, inset 0 0 12px rgba(255, 255, 255, 0.35);
+      }
+      .arrival-candle-red .body { top: 34%; height: 52%; background: linear-gradient(180deg, #ff7382, #ff2438); }
+      .arrival-candle-green .body { top: 12%; height: 52%; background: linear-gradient(180deg, #d9ffd4, #24ff41); }
+      .candle-label {
+        margin: 0;
+        text-align: center;
+        font-family: Orbitron, sans-serif;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        line-height: 1.25;
+        text-shadow: 0 0 14px currentColor;
+      }
+      .candle-label span { display: block; margin-top: 4px; font-size: 0.64rem; }
       .arrival.is-split { background: transparent; pointer-events: none; }
-      .arrival.is-split .arrival-left { animation: arrival-out-left 1.05s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
-      .arrival.is-split .arrival-right { animation: arrival-out-right 1.05s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
+      .arrival.is-split .arrival-left img { animation: arrival-to-red 0.55s ease forwards; transform-origin: 25% 50%; }
+      .arrival.is-split .arrival-right img { animation: arrival-to-green 0.55s ease forwards; transform-origin: 75% 50%; }
+      .arrival.is-split .arrival-candle-red { animation: arrival-red-down 2.1s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
+      .arrival.is-split .arrival-candle-green { animation: arrival-green-up 2.1s cubic-bezier(0.45, 0, 0.2, 1) forwards; }
       .arrival.is-split .arrival-load { animation: arrival-fade 0.28s ease forwards; }
       .arrival.is-split .arrival-stage::after { animation: arrival-seam 0.4s ease forwards; }
       @keyframes arrival-sheen {
         from { background-position: 130% 0; }
         to { background-position: -50% 0; }
       }
-      @keyframes arrival-out-left {
-        to { transform: translateX(-70vw); }
+      @keyframes arrival-to-red {
+        55% { transform: scaleX(0.16) scaleY(0.48); filter: sepia(1) saturate(8) hue-rotate(-18deg); opacity: 1; }
+        100% { transform: scaleX(0.1) scaleY(0.42); filter: sepia(1) saturate(8) hue-rotate(-18deg); opacity: 0; }
       }
-      @keyframes arrival-out-right {
-        to { transform: translateX(70vw); }
+      @keyframes arrival-to-green {
+        55% { transform: scaleX(0.16) scaleY(0.48); filter: sepia(1) saturate(7) hue-rotate(62deg); opacity: 1; }
+        100% { transform: scaleX(0.1) scaleY(0.42); filter: sepia(1) saturate(7) hue-rotate(62deg); opacity: 0; }
+      }
+      @keyframes arrival-red-down {
+        0% { opacity: 0; transform: translateY(6vh) scale(0.72); }
+        24% { opacity: 1; transform: translateY(0) scale(1); }
+        74% { opacity: 1; transform: translateY(32vh) scale(1); }
+        100% { opacity: 0; transform: translateY(68vh) scale(0.96); }
+      }
+      @keyframes arrival-green-up {
+        0% { opacity: 0; transform: translateY(-6vh) scale(0.72); }
+        24% { opacity: 1; transform: translateY(0) scale(1); }
+        74% { opacity: 1; transform: translateY(-32vh) scale(1); }
+        100% { opacity: 0; transform: translateY(-68vh) scale(0.96); }
       }
       @keyframes arrival-fade {
         to { opacity: 0; }
@@ -178,6 +246,20 @@
         <div class="arrival-half arrival-right" aria-hidden="true">
           <img src="%BASE_URL%images/muskpat-preview-concept-main.jpg" alt="" width="1024" height="1024" />
         </div>
+        <div class="arrival-candle arrival-candle-red" aria-hidden="true">
+          <div class="candle-mark">
+            <span class="wick"></span>
+            <span class="body"></span>
+          </div>
+          <p class="candle-label">RED<span>GOES DOWN</span></p>
+        </div>
+        <div class="arrival-candle arrival-candle-green" aria-hidden="true">
+          <div class="candle-mark">
+            <span class="wick"></span>
+            <span class="body"></span>
+          </div>
+          <p class="candle-label">GREEN<span>GOES UP</span></p>
+        </div>
       </div>
       <div class="arrival-load">
         <div class="arrival-load-top">
@@ -201,7 +283,7 @@
     <script>
       (function () {
         var DURATION = 3000;
-        var SPLIT = 1080;
+        var SPLIT = 2150;
         var arrival = document.getElementById("arrival");
         var fill = document.getElementById("arrival-fill");
         var pct = document.getElementById("arrival-pct");
@@ -231,6 +313,7 @@
             return;
           }
           arrival.classList.add("is-split");
+          document.getElementById("arrival-title").textContent = "A red candle goes down. A green candle goes up.";
           window.setTimeout(closeArrival, SPLIT);
         }
 
