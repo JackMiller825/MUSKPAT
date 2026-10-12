@@ -1,4 +1,4 @@
-import { ArrowLeftRight, ShieldAlert, Wallet } from "lucide-react";
+import { ArrowLeftRight, Wallet } from "lucide-react";
 import { chartUrl, tokenConfig } from "../config/token";
 import { ContractCopyButton } from "./ContractBar";
 import { GlowButton } from "./GlowButton";
@@ -67,13 +67,6 @@ export function HowToBuy() {
               <p>{step.text}</p>
             </Reveal>
           ))}
-        </div>
-        <div className="warning" role="note">
-          <ShieldAlert aria-hidden="true" />
-          <p>
-            <strong>Security check. </strong>
-            Always verify the official contract address shown on this website before swapping.
-          </p>
         </div>
         <div className="buy-actions">
           <GlowButton href={buy} variant="primary" showArrow disabled={!buy} title={buy ? "Buy $MUSKPAT" : "Swap link coming soon"}>

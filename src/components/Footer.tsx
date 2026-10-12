@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { socialLinks } from "../config/socials";
 import { tokenConfig } from "../config/token";
-import { DiscordIcon, TelegramIcon, XIcon } from "./BrandIcons";
+import { TelegramIcon, XIcon } from "./BrandIcons";
 import { navLinks } from "./MobileMenu";
 import { asset } from "../config/assets";
 
@@ -32,19 +32,10 @@ export function Footer() {
           <FooterLink href={socialLinks.x} label="X">
             <XIcon />
           </FooterLink>
-          <FooterLink href={socialLinks.discord} label="Discord">
-            <DiscordIcon />
-          </FooterLink>
         </div>
       </div>
       <div className="wrap footer-legal">
         <p>© 2026 MUSK MOONSHOT PATTERN</p>
-        <p>
-          Cryptocurrency and meme tokens are highly speculative and volatile. Nothing on this website constitutes financial, investment, legal, or tax advice. Always do your own research.
-        </p>
-        <p>
-          $MUSKPAT is an independent community meme token created for entertainment purposes. It is not affiliated with, endorsed by, or associated with Elon Musk, Tesla, SpaceX, X Corp., or any other referenced individual or company.
-        </p>
       </div>
     </footer>
   );

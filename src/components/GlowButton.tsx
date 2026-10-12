@@ -42,6 +42,27 @@ export function GlowButton({
     </>
   );
 
+  if (destination.startsWith("#") && !disabled) {
+    return (
+      <a
+        className={classes}
+        href={destination}
+        title={title}
+        onClick={(event) => {
+          const target = document.getElementById(destination.slice(1));
+          if (!target) return;
+          event.preventDefault();
+          const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+          history.replaceState(null, "", destination);
+          onClick?.();
+        }}
+      >
+        {inner}
+      </a>
+    );
+  }
+
   if (canNavigate) {
     return (
       <a className={classes} href={destination} target="_blank" rel="noopener noreferrer" title={title}>

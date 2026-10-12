@@ -10,25 +10,36 @@ export function useClipboard(value: string) {
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  async function copy() {
+  function copy() {
     if (!available) return;
     const text = value.trim();
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.top = "0";
+    area.style.left = "0";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    area.setSelectionRange(0, text.length);
+    let copiedNow = false;
     try {
-      await navigator.clipboard.writeText(text);
+      copiedNow = document.execCommand("copy");
+    } catch {
+      copiedNow = false;
+    }
+    area.remove();
+    if (copiedNow) {
       setCopied(true);
       return;
-    } catch {
-      const area = document.createElement("textarea");
-      area.value = text;
-      area.setAttribute("readonly", "");
-      area.style.position = "fixed";
-      area.style.left = "-9999px";
-      document.body.appendChild(area);
-      area.select();
-      const ok = document.execCommand("copy");
-      area.remove();
-      setCopied(ok);
     }
+    if (!navigator.clipboard) return;
+    void navigator.clipboard.writeText(text).then(
+      () => setCopied(true),
+      () => setCopied(false),
+    );
   }
 
   return { available, copied, copy };

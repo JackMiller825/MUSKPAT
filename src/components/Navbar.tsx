@@ -102,14 +102,7 @@ export function Navbar() {
           <IconLink href={socialLinks.x} label="X">
             <XIcon />
           </IconLink>
-          <GlowButton
-            href={tokenConfig.uniswapUrl}
-            variant="primary"
-            showArrow
-            className="nav-buy"
-            disabled={!tokenConfig.uniswapUrl.trim()}
-            title={tokenConfig.uniswapUrl.trim() ? "Buy $MUSKPAT" : "Swap link coming soon"}
-          >
+          <GlowButton href="#how-to-buy" variant="primary" showArrow className="nav-buy" title="Buy $MUSKPAT">
             BUY {tokenConfig.ticker}
           </GlowButton>
           <button

@@ -1,6 +1,5 @@
 import { About } from "./components/About";
 import { Community } from "./components/Community";
-import { ContractBar } from "./components/ContractBar";
 import { FinalCta } from "./components/FinalCta";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
@@ -25,7 +24,6 @@ export default function App() {
         <PatternThesis />
         <RocketDivider label="HIGHER THAN EARTH" />
         <Tokenomics />
-        <ContractBar />
         <Roadmap />
         <RocketDivider label="TO INFINITY AND HIGHER" />
         <HowToBuy />

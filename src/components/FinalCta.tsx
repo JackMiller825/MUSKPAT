@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { communityUrl } from "../config/socials";
 import { tokenConfig } from "../config/token";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { GlowButton } from "./GlowButton";
@@ -9,9 +8,6 @@ export function FinalCta() {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const [rising, setRising] = useState(false);
-  const join = communityUrl();
-  const buy = tokenConfig.uniswapUrl.trim();
-
   useEffect(() => {
     if (reduced) {
       setRising(true);
@@ -45,10 +41,10 @@ export function FinalCta() {
           </h2>
           <p className="ticker">{tokenConfig.ticker}</p>
           <div className="final-actions">
-            <GlowButton href={join} variant="ghost" showArrow disabled={!join} title={join ? "Join community" : "Community link coming soon"}>
+            <GlowButton href="#community" variant="ghost" showArrow title="Join community">
               JOIN COMMUNITY
             </GlowButton>
-            <GlowButton href={buy} variant="primary" showArrow disabled={!buy} title={buy ? "Buy $MUSKPAT" : "Swap link coming soon"}>
+            <GlowButton href="#how-to-buy" variant="primary" showArrow title="Buy $MUSKPAT">
               BUY {tokenConfig.ticker}
             </GlowButton>
           </div>

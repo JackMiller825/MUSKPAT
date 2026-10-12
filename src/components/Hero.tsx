@@ -1,4 +1,3 @@
-import { communityUrl } from "../config/socials";
 import { tokenConfig } from "../config/token";
 import { FloatingChart } from "./FloatingChart";
 import { GlowButton } from "./GlowButton";
@@ -11,9 +10,6 @@ const points = [
 ];
 
 export function Hero() {
-  const join = communityUrl();
-  const buy = tokenConfig.uniswapUrl.trim();
-
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="hero-bg" />
@@ -41,30 +37,13 @@ export function Hero() {
             $MUSKPAT is a community-powered Ethereum meme token built around one simple idea: when ambition gets bigger, the pattern gets bigger.
           </p>
           <div className="hero-actions">
-            <GlowButton
-              href={buy}
-              artSrc={asset("images/muskpat-button-buy.png")}
-              variant="primary"
-              disabled={!buy}
-              title={buy ? "Buy $MUSKPAT" : "Swap link coming soon"}
-            >
+            <GlowButton href="#how-to-buy" artSrc={asset("images/muskpat-button-buy.png")} variant="primary" title="Buy $MUSKPAT">
               BUY {tokenConfig.ticker}
             </GlowButton>
-            <GlowButton
-              href={join}
-              artSrc={asset("images/muskpat-button-community.png")}
-              variant="ghost"
-              disabled={!join}
-              title={join ? "Join community" : "Community link coming soon"}
-            >
+            <GlowButton href="#community" artSrc={asset("images/muskpat-button-community.png")} variant="ghost" title="Join community">
               JOIN COMMUNITY
             </GlowButton>
           </div>
-          {!buy || !join ? (
-            <p className="pending-links">
-              {!buy ? "Swap link coming soon." : null} {!join ? "Community link coming soon." : null}
-            </p>
-          ) : null}
           <ul className="value-points">
             {points.map((point) => (
               <li key={point.kicker}>
@@ -90,7 +69,6 @@ export function Hero() {
             fetchPriority="high"
           />
           <img className="hero-sticker chart-sticker" src={asset("images/muskpat-sticker-chart-up.png")} alt="" width="120" height="104" />
-          <img className="hero-sticker rocket-sticker" src={asset("images/muskpat-sticker-rocket.png")} alt="" width="110" height="110" />
           <p className="stage-readout">
             <span>MISSION ACTIVE</span>
             <span>PATTERN DETECTED</span>

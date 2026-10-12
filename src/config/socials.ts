@@ -4,8 +4,8 @@
  * Empty values disable the matching control. Never use "#" as a stand-in.
  */
 export const socialLinks = {
-  telegram: "",
-  x: "",
+  telegram: "https://t.me/muskpat_eth",
+  x: "https://x.com/muskpat_eth",
   discord: "",
 } as const;
 

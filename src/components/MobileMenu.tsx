@@ -75,13 +75,7 @@ export function MobileMenu({ open, active, onClose }: MobileMenuProps) {
         <SocialButton href={socialLinks.discord} label="Discord">
           <DiscordIcon />
         </SocialButton>
-        <GlowButton
-          href={tokenConfig.uniswapUrl}
-          variant="primary"
-          showArrow
-          disabled={!tokenConfig.uniswapUrl.trim()}
-          title={tokenConfig.uniswapUrl.trim() ? "Buy $MUSKPAT" : "Swap link coming soon"}
-        >
+        <GlowButton href="#how-to-buy" variant="primary" showArrow title="Buy $MUSKPAT" onClick={onClose}>
           BUY {tokenConfig.ticker}
         </GlowButton>
       </div>

@@ -10,7 +10,6 @@ export function Community() {
   const x = socialLinks.x.trim();
   const dexscreener = tokenConfig.dexscreenerUrl.trim();
   const dextools = tokenConfig.dextoolsUrl.trim();
-  const channelsReady = Boolean(telegram || x || dexscreener || dextools);
 
   return (
     <section className="section community" id="community" aria-labelledby="community-title">
@@ -89,9 +88,6 @@ export function Community() {
             loading="lazy"
           />
         </figure>
-        {!channelsReady ? (
-          <p className="fine center">Channel and chart links will appear here when they are published.</p>
-        ) : null}
       </div>
       <img className="float-sticker group-float sticker-optional" src={asset("images/muskpat-sticker-group.png")} alt="" width="280" height="106" />
     </section>

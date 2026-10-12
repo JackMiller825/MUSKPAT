@@ -115,7 +115,6 @@ export function PatternThesis() {
               <img src={asset("images/muskpat-icon-tesla.png")} alt="" width="42" height="42" />
               <img src={asset("images/muskpat-icon-spacex.png")} alt="" width="42" height="42" />
             </div>
-            <p className="terminal-note">Artwork motifs only. Not affiliations, listings, or market data.</p>
           </div>
         </Reveal>
       </div>
